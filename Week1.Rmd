@@ -1,0 +1,65 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+Week 1 - Lab Activity 1
+
+1.1 Open file:
+
+```{r}
+View(`mixo.simplified(1)`)
+```
+
+
+1.2 Show a summary:
+
+```{r}
+summary(`mixo.simplified(1)`)
+```
+
+1.3 Produce a scatterplot of Mass as predicted by SVL, and include a Linear Model:
+
+```{r}
+library(ggplot2)
+ggplot(`mixo.simplified(1)`,aes(x=SVL,y=Mass))+ geom_point(shape=19) + geom_smooth(method="lm", se = FALSE) + ggtitle("Linear Model of Mass as predicted by SVL")
+```
+
+1.4 Produce plot with both Mass and SVL log transformed which should produce an approximately linear relationship 
+
+```{r}
+ggplot(`mixo.simplified(1)`,aes(x=log(SVL),y=log(Mass)))+ geom_point(shape=19) + geom_smooth(method="lm", se = FALSE) + ggtitle("Linear Log Model of Mass as predicted by SVL")
+```
+
+1.5 Modify plot in item 1.4 so data points are colour coded by Gender, but the linear model is kept the same (global - whole data set) 
+
+```{r}
+ggplot(`mixo.simplified(1)`,aes(x=log(SVL),y=log(Mass)))+ geom_point(aes(col=Gender)) + geom_smooth(method="lm", se = FALSE) + ggtitle("Linear Log Model of Mass as predicted by SVL and Gender")
+```
+
+1.6 Produce and plot separate models for each Gender using the col aesthetic as Gender again, but now globally in the ggplot() function
+
+```{r}
+ggplot(`mixo.simplified(1)`,aes(x=log(SVL),y=log(Mass),col=Gender))+ geom_point(shape=19) + geom_smooth(method="lm", se = FALSE) + ggtitle("Linear Log Model of Mass as predicted by SVL")
+```
+
+1.7 Produce a scatterplot of the length of the right tibia by SVL, grouped by Gender, and fit a separate linear model to each group
+
+```{r}
+ggplot(`mixo.simplified(1)`,aes(x=SVL,y=Righ.Tibia,col=Gender))+ geom_point(shape=19) + geom_smooth(method="lm", se = FALSE) + ggtitle("Linear Model of Right Tibia as predicted by SVL and Gender")
+```
+

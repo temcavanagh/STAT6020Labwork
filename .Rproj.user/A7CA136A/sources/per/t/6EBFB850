@@ -1,0 +1,32 @@
+{
+    "id": "6EBFB850",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1597048200047.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "expression": "mixo.simplified",
+        "caption": "mixo.simplified",
+        "totalObservations": 1312,
+        "displayedObservations": 1312,
+        "variables": 8,
+        "cacheKey": "78CFD307",
+        "object": "mixo.simplified",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=mixo.simplified&cache_key=78CFD307&max_cols=50",
+        "preview": 0
+    },
+    "folds": "",
+    "lastKnownWriteTime": -4250809698240724376,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1597048200047,
+    "read_only": false,
+    "read_only_alternatives": []
+}
