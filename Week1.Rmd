@@ -23,6 +23,8 @@ Week 1
 
 Lab Activity 1 - Intro
 
+** Ensure dataset is imported to environment prior to running Activity 1 **
+
 1.1 Open file:
 
 ```{r}
