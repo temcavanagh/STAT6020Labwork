@@ -50,3 +50,23 @@ which.max(hatvalues (lm.fit))
 
 
 # Multiple linear regression
+
+# syntax lm(y~x1+x2+x3) used to fit model with 3 predictors
+
+lm.fit=lm(medv~lstat+age,data=Boston)
+summary(lm.fit)
+
+# Regression using all predictors
+lm.fit=lm(medv~.,data=Boston)
+summary(lm.fit)
+
+# Access individual components of summary object by name
+summary(lm.fit)$r.sq
+
+
+# Interaction terms
+summary(lm(medv~lstat*age,data=Boston))
+
+# Non-linear transformation of predictors
+lm.fit2=lm(medv~lstat+I(lstat^2))
+summary(lm.fit2)
