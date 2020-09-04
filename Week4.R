@@ -69,3 +69,15 @@ test_class_labels <- Data[test_index, "Approved"]
 training_index <- -test_index
 # Subsetting the data: training rows, numerical predictors and response variable:
 training_dat <- Data[training_index, c(numeric_predictors, "Approved")]
+
+# fit lrm model, named LR_CRX
+# Train the model
+LR_CRX = glm(formula=Approved~., data=training_dat, family=binomial)
+summary(LR_CRX)
+# Make predictions (test data)
+P_positive_test = predict.glm(LR_CRX, newdata=test_predictors, type="response")
+# Apply threshold (transform probabilities into class label +1, -1)
+Pred_class = sign(P_positive_test - 0.5)
+# Build contingency table (predicted labels vs true labels)
+cont_tab = table(Pred_class, test_class_labels)
+cont_tab
