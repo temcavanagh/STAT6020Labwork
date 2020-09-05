@@ -69,6 +69,7 @@ test_class_labels <- Data[test_index, "Approved"]
 training_index <- -test_index
 # Subsetting the data: training rows, numerical predictors and response variable:
 training_dat <- Data[training_index, c(numeric_predictors, "Approved")]
+training_dat$Approved <- as.factor(training_dat$Approved) # Converting char to factor
 
 # fit lrm model, named LR_CRX
 # Train the model
@@ -81,3 +82,39 @@ Pred_class = sign(P_positive_test - 0.5)
 # Build contingency table (predicted labels vs true labels)
 cont_tab = table(Pred_class, test_class_labels)
 cont_tab
+
+# cont_tab shows the following:
+# 69 true negatives
+# 33 true positives
+# 19 false negatives
+# 9 false positives
+
+# assess classification accuracy and classification error:
+accuracy = (cont_tab[1,1] + cont_tab[2,2]) / 
+  (cont_tab[1,1]+cont_tab[1,2]+cont_tab[2,1]+cont_tab[2,2])
+accuracy
+error = (cont_tab[1,2] + cont_tab[2,1]) / 
+  (cont_tab[1,1]+cont_tab[1,2]+cont_tab[2,1]+cont_tab[2,2])
+error
+
+# or equivalently:
+accuracy1 = sum(diag(cont_tab))/sum(cont_tab)
+accuracy1
+error1 = 1 - accuracy1
+error1
+
+summary(LR_CRX)
+
+# Repeat above exercise using only variables YearsEmployed, CreditScore, 
+# and AccountBalance as predictors.
+
+LR_CRX = glm(formula=Approved~YearsEmployed+CreditScore+AccountBalance, 
+             data=training_dat, family=binomial)
+P_positive_test = predict.glm(LR_CRX, newdata=test_predictors, type="response")
+Pred_class = sign(P_positive_test - 0.5)
+cont_tab = table(Pred_class, test_class_labels)
+accuracy = sum(diag(cont_tab))/sum(cont_tab)
+accuracy
+error = 1 - accuracy
+error
+summary(LR_CRX)
