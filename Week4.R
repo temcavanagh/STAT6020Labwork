@@ -118,3 +118,29 @@ accuracy
 error = 1 - accuracy
 error
 summary(LR_CRX)
+
+# compute probability that a person employed for 5 years, with credit score of 6, 
+# and account balance of 10000, will get credit application approved (class positive, +)
+# Eq. (2), the required probability is given by P = 1/(1 + e−(β0+β1×5+β2×6+β3×10000))
+
+beta0 = summary(LR_CRX)$coefficients[1,1] #Intercept
+beta1 = summary(LR_CRX)$coefficients[2,1] #YearsEmployed
+beta2 = summary(LR_CRX)$coefficients[3,1] #CreditScore
+beta3 = summary(LR_CRX)$coefficients[4,1] #AccountBalance
+
+Prob1 = 1/(1 + exp(-(beta0 + beta1*5 + beta2*6 + beta3*10000)))
+
+# Repeat calculation using predict.glm()
+test_data = data.frame(YearsEmployed=5, CreditScore=6, AccountBalance=10000)
+predict.glm(LR_CRX, newdata = test_data, type = "response")
+
+# Calculate for person 1/2 year employed, 0 account balance, credit score of 3
+Prob2 = 1/(1 + exp(-(beta0 + beta1*0.5 + beta2*3 + beta3*0)))
+
+# Repeat using predict.glm()
+test_data = data.frame(YearsEmployed=0.5, CreditScore=3, AccountBalance=0)
+predict.glm(LR_CRX, newdata = test_data, type = "response")
+
+# how much will the log-odds — Eq. (7) — of credit approval increase or 
+# decrease if the person stays 1 additional year employed
+beta1
